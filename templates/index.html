@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Data Analyst AI Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</head>
+
+<body>
+
+    <div class="landing-container">
+
+        <div class="hero-card">
+
+            <div class="hero-content">
+
+                <h1>Data Analyst AI Dashboard</h1>
+
+                <p class="subtitle">
+
+                    Upload CSV or Excel datasets, generate insights,
+                    visualize trends, and interact with AI.
+
+                </p>
+
+                <form action="/upload"
+                      method="POST"
+                      enctype="multipart/form-data"
+                      onsubmit="showLoading()">
+
+                    <div class="upload-box">
+
+                        <input
+                            type="file"
+                            name="dataset"
+                            accept=".csv,.xlsx"
+                            required>
+
+                    </div>
+
+                    <button type="submit" class="upload-btn">
+
+                        Analyze Dataset
+
+                    </button>
+
+                    <div id="loading" class="loading-box">
+
+                        <h3>Analyzing Dataset</h3>
+
+                        <p>
+
+                            Please wait while the dashboard prepares
+                            the analysis and visualizations.
+
+                        </p>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Data Analyst AI Dashboard</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+
+            <h1>Data Analyst AI Dashboard</h1>
+
+            <p>
+                Analyze datasets, visualize trends, and interact with AI.
+            </p>
+
+        </div>
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <h3>Total Rows</h3>
+
+                <p>{{ summary.rows }}</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3>Total Columns</h3>
+
+                <p>{{ summary.columns }}</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3>Missing Values</h3>
+
+                <p>{{ summary.total_missing_values }}</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3>Numeric Columns</h3>
+
+                <p>{{ summary.numeric_columns_count }}</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3>Text Columns</h3>
+
+                <p>{{ summary.text_columns_count }}</p>
+
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Dataset Overview</h2>
+
+            <div class="summary-section">
+
+                <h3>Column Names</h3>
+
+                <ul>
+
+                    {% for column in summary.column_names %}
+
+                    <li>{{ column }}</li>
+
+                    {% endfor %}
+
+                </ul>
+
+                <h3>Missing Values</h3>
+
+                <ul>
+
+                    {% for column, value in summary.missing_values.items() %}
+
+                    <li>{{ column }} : {{ value }}</li>
+
+                    {% endfor %}
+
+                </ul>
+
+                <h3>Mean Values</h3>
+
+                <ul>
+
+                    {% for column, value in summary.mean.items() %}
+
+                    <li>{{ column }} : {{ "%.2f"|format(value) }}</li>
+
+                    {% endfor %}
+
+                </ul>
+
+                <h3>Maximum Values</h3>
+
+                <ul>
+
+                    {% for column, value in summary.maximum.items() %}
+
+                    <li>{{ column }} : {{ value }}</li>
+
+                    {% endfor %}
+
+                </ul>
+
+                <h3>Minimum Values</h3>
+
+                <ul>
+
+                    {% for column, value in summary.minimum.items() %}
+
+                    <li>{{ column }} : {{ value }}</li>
+
+                    {% endfor %}
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Business Insights</h2>
+
+            <ul>
+
+                {% for insight in insights %}
+
+                <li>{{ insight }}</li>
+
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Visualizations</h2>
+
+            <div class="chart-container">
+
+                {{ charts.bar | safe }}
+
+            </div>
+
+            <div class="chart-container">
+
+                {{ charts.pie | safe }}
+
+            </div>
+
+            <div class="chart-container">
+
+                {{ charts.line | safe }}
+
+            </div>
+
+        </div>
+
+        <div class="card action-card">
+
+            <a href="/download-report">
+
+                <button class="download-btn">
+
+                    Download Report
+
+                </button>
+
+            </a>
+
+        </div>
+
+        <div class="card">
+
+            <h2>AI Assistant</h2>
+
+            <form action="/ask" method="POST">
+
+                <input
+                    type="text"
+                    name="question"
+                    placeholder="Ask a question about the dataset..."
+                    required>
+
+                <button>
+
+                    Submit
+
+                </button>
+
+            </form>
+
+            {% if answer %}
+
+            <div class="response-box">
+
+                <h3>Response</h3>
+
+                <p>{{ answer }}</p>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
