@@ -184,18 +184,6 @@ http://127.0.0.1:5000
 
 ---
 
-## Screenshots
-
-Add screenshots of your application here.
-
-```text
-screenshots/home_page.png
-
-screenshots/dashboard.png
-```
-
----
-
 ## Author
 
 ### S. Prathibha
